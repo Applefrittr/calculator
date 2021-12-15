@@ -1,0 +1,29 @@
+div.calculator  {
+    display: flex;
+    align-items: center;
+    /*justify-content: space-around;*/
+    background-color: silver;
+    height: 800px;
+    width: 500px;
+    border: solid 3px black;
+    border-radius: 10px;
+    flex-direction: column;
+
+}
+
+body    {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: slateblue;
+}
+
+div.display {
+    background-color: black;
+    width: 433px;
+    font-size: 64px;
+    height: 125px;
+    color: white;
+    text-align: right;
+}

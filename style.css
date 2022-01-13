@@ -8,7 +8,7 @@ div.calculator  {
     border: solid 3px black;
     border-radius: 10px;
     flex-direction: column;
-
+    gap: 25px;
 }
 
 body    {
@@ -17,13 +17,84 @@ body    {
     justify-content: center;
     min-height: 100vh;
     background-color: slateblue;
+    font-family: sans-serif;
 }
 
 div.display {
+    display: flex;
     background-color: black;
     width: 433px;
     font-size: 64px;
     height: 125px;
     color: white;
-    text-align: right;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+}
+
+div.ceButton    {
+    display: flex;
+    width: 433px;
+    height: 75px;
+    justify-content: flex-end;
+    align-items: end;
+    box-sizing: border-box;
+    padding: 0 20px;
+    
+}
+
+button.CE   {
+    padding: 2px 25px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: solid black 2px;
+    font-size: 24px;
+}
+
+div.buttonPad   {
+    width: 433px;
+    height:450px;
+    display: flex;
+
+}
+
+div.numbers {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+button.number   {
+    font-size: 24px;
+    padding: 10px;
+    height: 60px;
+    width: 60px;
+    border: solid black 2px;
+}
+
+#zero   {
+    width: 140px;
+}
+
+div.functions   {
+    display:flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button.function {
+    font-size: 24px;
+    padding: 10px;
+    height: 60px;
+    width: 60px;
+    background-color: darkslategrey;
+    color: white;
+    border: solid black 2px;
+}
+
+#equals {
+    width: 140px;
 }

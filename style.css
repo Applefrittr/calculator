@@ -75,7 +75,7 @@ button.number   {
 }
 
 #zero   {
-    width: 140px;
+    width: 145px;
 }
 
 div.functions   {
@@ -97,4 +97,8 @@ button.function {
 
 #equals {
     width: 140px;
+}
+
+div.footer  {
+    color: gray;
 }

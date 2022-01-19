@@ -63,15 +63,16 @@ div.numbers {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 button.number   {
     font-size: 24px;
     padding: 10px;
-    height: 60px;
-    width: 60px;
+    height: 65px;
+    width: 65px;
     border: solid black 2px;
+    border-radius: 5px;
 }
 
 button.number.zero  {
@@ -88,21 +89,23 @@ div.functions   {
 button.func {
     font-size: 24px;
     padding: 10px;
-    height: 60px;
-    width: 60px;
+    height: 65px;
+    width: 65px;
     background-color: darkslategrey;
     color: white;
     border: solid black 2px;
+    border-radius: 5px;
 }
 
 #equal {
-    width: 140px;
+    width: 150px;
     font-size: 24px;
     padding: 10px;
-    height: 60px;
+    height: 65px;
     background-color: darkslategrey;
     color: white;
     border: solid black 2px;
+    border-radius: 5px;
 }
 
 div.footer  {

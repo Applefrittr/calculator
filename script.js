@@ -29,9 +29,19 @@ digits.forEach((number) => {
 const funcs = document.querySelectorAll('.func')        //listens for when user selects specific function, adds to memory[1]
 
 funcs.forEach((func) => {
-    func.addEventListener('click', () => {
-        memory[1] = func.id
-        print(func.id)
+    func.addEventListener('click', () => {              
+        if (memory[1] == 0)     {                       //case if user selects a function without a prior function slected, memory[1] is empty
+            memory[1] = func.id
+            print(func.id)
+        }
+        else    {                                       //case when the user will "chain" functions together instead of using the equals button
+            memory[0] = equate(memory[0], memory[2])
+            memory[1] = func.id
+            memory[2] = 0
+            clear()
+            print(memory[0])
+            print(func.id)
+        }
     })
 })
 

@@ -85,7 +85,7 @@ div.functions   {
     justify-content: center;
 }
 
-button.function {
+button.func {
     font-size: 24px;
     padding: 10px;
     height: 60px;
@@ -95,8 +95,14 @@ button.function {
     border: solid black 2px;
 }
 
-#equals {
+#equal {
     width: 140px;
+    font-size: 24px;
+    padding: 10px;
+    height: 60px;
+    background-color: darkslategrey;
+    color: white;
+    border: solid black 2px;
 }
 
 div.footer  {

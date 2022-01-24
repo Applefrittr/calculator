@@ -5,24 +5,7 @@ const digits = document.querySelectorAll('.number')     // listens for when the 
 
 digits.forEach((number) => {
     number.addEventListener('click', () => {
-        
-        if  (memory[1] == 0)    {
-            print(number.id)
-            memory[0] += number.id                          //appends user input instead of adding number together, creates string of numbers
-            memory[0] = parseInt(memory[0])                 //converts string to integers
-        }
-        else if (memory[1] != 0  && memory[2] == 0)    {    //conditional to see whether memory[2] contains anything, will clear display much like a real calculator to take second number input by user
-            clear()
-            print(number.id)
-            memory[2] += number.id
-            memory[2] = parseInt(memory[2])
-        }
-        else if (memory[1] != 0  && memory[2] != 0)     {
-            print(number.id)
-            memory[2] += number.id
-            memory[2] = parseInt(memory[2])
-
-        }
+        numbers(number.id)
     })
 })
 
@@ -30,18 +13,7 @@ const funcs = document.querySelectorAll('.func')        //listens for when user 
 
 funcs.forEach((func) => {
     func.addEventListener('click', () => {              
-        if (memory[1] == 0)     {                       //case if user selects a function without a prior function slected, memory[1] is empty
-            memory[1] = func.id
-            print(func.id)
-        }
-        else    {                                       //case when the user will "chain" functions together instead of using the equals button
-            memory[0] = equate(memory[0], memory[2])
-            memory[1] = func.id
-            memory[2] = 0
-            clear()
-            print(memory[0])
-            print(func.id)
-        }
+       operators(func.id)
     })
 })
 
@@ -62,26 +34,21 @@ equals.addEventListener('click', () =>  {
     print(memory[0])
 })
 
-function equate(a,b)   {                    // equals funtion, looks at func operator in memory[1] and executes based on func
-    if (memory[1] === "+")   {
-        return a+b
-    }
-    else if (memory[1] === "-")     {
-        return a-b
-    }
-    else if (memory[1] === "x")     {
-        return a*b
-    }
-    else if (memory[1] === "/")     {
-        return a/b
-    }
-    else if (memory[1] === "^")     {
-        return a**b
-    }
-    else {
-        console.log('ERROR!')
-    }    
-}
+window.addEventListener('keydown', (e) => {
+   const button = document.querySelector(`button[id="${e.key}"]`)
+   console.log(button.id)
+
+   if (!button) return
+   
+   if (button.id == 0 || button.id == 1 || button.id == 2 || button.id == 3 || button.id == 4 || button.id == 5 || button.id == 6 || button.id == 7 || button.id == 8 || button.id == 9)    {
+        numbers(button.id)
+   }
+   else if(button.id === `+`|| button.id == `-` || button.id == `*` || button.id == `/`  )    {
+       operators(button.id)
+   }
+})
+
+///////////////////////////FUNCTIONS//////////////////////////////////
 
 function print(x)   {                                 //function that will displays input as well as funtion results
     const screen = document.querySelector('#display')
@@ -97,4 +64,60 @@ function clear()    {                                  //CE, clear display funct
     while (display.firstChild)  {
         display.removeChild(display.firstChild)
     }
+}
+
+function numbers(input)    {
+    
+    if  (memory[1] == 0)    {
+        print(input)
+        memory[0] += input                          //appends user input instead of adding number together, creates string of numbers
+        memory[0] = parseInt(memory[0])                 //converts string to integers
+    }
+    else if (memory[1] != 0  && memory[2] == 0)    {    //conditional to see whether memory[2] contains anything, will clear display much like a real calculator to take second number input by user
+        clear()
+        print(input)
+        memory[2] += input
+        memory[2] = parseInt(memory[2])
+    }
+    else if (memory[1] != 0  && memory[2] != 0)     {
+        print(input)
+        memory[2] += input
+        memory[2] = parseInt(memory[2])
+    }
+}
+
+function operators(input)   {
+    if (memory[1] == 0)     {                       //case if user selects a function without a prior function slected, memory[1] is empty
+        memory[1] = input
+        print(input)
+    }
+    else    {                                       //case when the user will "chain" functions together instead of using the equals button
+        memory[0] = equate(memory[0], memory[2])
+        memory[1] = input
+        memory[2] = 0
+        clear()
+        print(memory[0])
+        print(input)
+    }   
+}
+
+function equate(a,b)   {                    // equals funtion, looks at func operator in memory[1] and executes based on func
+    if (memory[1] === "+")   {
+        return a+b
+    }
+    else if (memory[1] === "-")     {
+        return a-b
+    }
+    else if (memory[1] === "*")     {
+        return a*b
+    }
+    else if (memory[1] === "/")     {
+        return a/b
+    }
+    else if (memory[1] === "^")     {
+        return a**b
+    }
+    else {
+        console.log('ERROR!')
+    }    
 }

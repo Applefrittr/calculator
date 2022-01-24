@@ -45,11 +45,19 @@ div.ceButton    {
 
 button.CE   {
     padding: 2px 25px;
-    background-color: red;
+    background-color: rgb(255, 0, 0);
     color: white;
     border-radius: 10px;
     border: solid black 2px;
     font-size: 24px;
+}
+
+button.CE:hover {
+    background-color: rgb(225, 0, 0);
+}
+
+button.CE:active    {
+    background-color: rgb(200, 0, 0);
 }
 
 div.buttonPad   {
@@ -97,6 +105,14 @@ button.func {
     border-radius: 5px;
 }
 
+button.func:hover   {
+    background-color: rgb(47, 99, 99);
+}
+
+button.func:active  {
+    background-color: rgb(47, 119, 119);
+}
+
 #equal {
     width: 150px;
     font-size: 24px;
@@ -106,6 +122,14 @@ button.func {
     color: white;
     border: solid black 2px;
     border-radius: 5px;
+}
+
+#equal:hover    {
+    background-color: rgb(47, 99, 99);
+}
+
+#equal:active   {
+    background-color: rgb(47, 119, 119);
 }
 
 div.footer  {

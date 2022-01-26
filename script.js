@@ -24,7 +24,14 @@ ce.addEventListener('click', () => {
     clear()
 })
 
-const equals = document.querySelector('#equal')         //listens for when user presses equals button
+const del = document.querySelector('.backspace')
+
+del.addEventListener('click', () => {
+    display.removeChild(display.lastChild)
+    backspace()    
+})
+
+const equals = document.querySelector('#Enter')         //listens for when user clicks equals button
 
 equals.addEventListener('click', () =>  {
     memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
@@ -34,29 +41,48 @@ equals.addEventListener('click', () =>  {
     print(memory[0])
 })
 
-window.addEventListener('keydown', (e) => {
+window.addEventListener('keydown', (e) => {                 //Keyboard support, listens for when the users either numbers or function symbols only.  Enter is used for equals.  Used Event keys to identify whihc button is pressed
    const button = document.querySelector(`button[id="${e.key}"]`)
+   console.log(e)
    console.log(button.id)
 
    if (!button) return
    
-   if (button.id == 0 || button.id == 1 || button.id == 2 || button.id == 3 || button.id == 4 || button.id == 5 || button.id == 6 || button.id == 7 || button.id == 8 || button.id == 9)    {
+   if (button.id == 0 || button.id == 1 || button.id == 2 || button.id == 3 || button.id == 4 || button.id == 5 || button.id == 6 || button.id == 7 || button.id == 8 || button.id == 9 || button.id == `.`)    {
         numbers(button.id)
    }
-   else if(button.id === `+`|| button.id == `-` || button.id == `*` || button.id == `/`  )    {
+   else if (button.id === `+`|| button.id == `-` || button.id == `*` || button.id == `/` || button.id == `^` )    {
        operators(button.id)
    }
+    else if (button.id == `Enter`)   {
+    memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
+    memory[1] = 0
+    memory[2] = 0
+    clear()
+    print(memory[0])
+    }
+    else if (button.id == `Delete`)  {                   //Delete key is the keyboard support for the CE
+        memory = [0, 0, 0]
+        clear()
+    }
+    else if (button.id == `Backspace`)  {
+        display.removeChild(display.lastChild)
+        backspace()
+    }
 })
 
 ///////////////////////////FUNCTIONS//////////////////////////////////
 
 function print(x)   {                                 //function that will displays input as well as funtion results
+    
+    x = x.toString()
     const screen = document.querySelector('#display')
 
-    const div = document.createElement('div')
-    div.textContent = x
-
-    screen.appendChild(div)
+    for (let i = 0; i < x.length; i++)  {              // implemented for loop to print out solution as individual divs instead of 1 div for large answers. ie. answer = 25, print 2 sperate divs for 2 AND 5, instead of 1 div for 25.  Necessary for backspace functionality
+        const div = document.createElement('div')
+        div.textContent = x.charAt(i)
+        screen.appendChild(div)
+    }    
 }
 
 function clear()    {                                  //CE, clear display function.  Deletes divs whihc represent the numbers and funcs selected by user
@@ -71,18 +97,18 @@ function numbers(input)    {
     if  (memory[1] == 0)    {
         print(input)
         memory[0] += input                          //appends user input instead of adding number together, creates string of numbers
-        memory[0] = parseInt(memory[0])                 //converts string to integers
+        memory[0] = parseFloat(memory[0])                 //converts string to integers
     }
     else if (memory[1] != 0  && memory[2] == 0)    {    //conditional to see whether memory[2] contains anything, will clear display much like a real calculator to take second number input by user
         clear()
         print(input)
         memory[2] += input
-        memory[2] = parseInt(memory[2])
+        memory[2] = parseFloat(memory[2])
     }
     else if (memory[1] != 0  && memory[2] != 0)     {
         print(input)
         memory[2] += input
-        memory[2] = parseInt(memory[2])
+        memory[2] = parseFloat(memory[2])
     }
 }
 
@@ -120,4 +146,28 @@ function equate(a,b)   {                    // equals funtion, looks at func ope
     else {
         console.log('ERROR!')
     }    
+}
+
+function backspace()    {
+
+    if (memory[0] != 0 && memory[2] == 0 && memory[1] == 0)  {
+        if (memory[0] > 9 || memory[0] < -9)    {
+            memory[0] = memory[0].toString()
+            memory[0] = memory[0].slice(0, -1)
+            memory[0] = parseFloat(memory[0])
+        }
+        else memory[0] = 0
+    }
+    else if (memory[0] != 0 && memory[2] != 0)  {
+        if (memory[2] > 9 || memory[2] < -9)    {
+            memory[2] = memory[2].toString()
+            memory[2] = memory[2].slice(0, -1)
+            memory[2] = parseFloat(memory[2])
+        }
+        else memory[2] = 0
+    }
+    else  if (memory[0] != 0 && memory[2] == 0 && memory[1] != 0)  {
+        memory[1] = 0
+    }
+    else return
 }

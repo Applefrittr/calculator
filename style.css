@@ -40,6 +40,7 @@ div.ceButton    {
     align-items: end;
     box-sizing: border-box;
     padding: 0 20px;
+    gap: 20px;
     
 }
 
@@ -60,6 +61,22 @@ button.CE:active    {
     background-color: rgb(200, 0, 0);
 }
 
+button.backspace    {
+    padding: 2px 25px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border-radius: 10px;
+    border: solid black 2px;
+    font-size: 24px;
+}
+
+button.backspace:hover {
+    background-color: rgb(225, 0, 0);
+}
+
+button.backspace:active    {
+    background-color: rgb(200, 0, 0);
+}
 div.buttonPad   {
     width: 433px;
     height:450px;
@@ -113,7 +130,7 @@ button.func:active  {
     background-color: rgb(47, 119, 119);
 }
 
-#equal {
+#Enter {
     width: 150px;
     font-size: 24px;
     padding: 10px;
@@ -124,11 +141,11 @@ button.func:active  {
     border-radius: 5px;
 }
 
-#equal:hover    {
+#Enter:hover    {
     background-color: rgb(47, 99, 99);
 }
 
-#equal:active   {
+#Enter:active   {
     background-color: rgb(47, 119, 119);
 }
 

@@ -21,6 +21,7 @@ const ce = document.querySelector('.CE')               //listens for when user h
 
 ce.addEventListener('click', () => {
     memory = [0, 0, 0]
+    display.classList.remove('smaller')
     clear()
 })
 
@@ -63,6 +64,7 @@ window.addEventListener('keydown', (e) => {                 //Keyboard support, 
     }
     else if (button.id == `Delete`)  {                   //Delete key is the keyboard support for the CE
         memory = [0, 0, 0]
+        display.classList.remove('smaller')
         clear()
     }
     else if (button.id == `Backspace`)  {
@@ -82,7 +84,11 @@ function print(x)   {                                 //function that will displ
         const div = document.createElement('div')
         div.textContent = x.charAt(i)
         screen.appendChild(div)
-    }    
+    }
+
+    if (display.childElementCount > 10) {
+        display.classList.add('smaller')
+    }
 }
 
 function clear()    {                                  //CE, clear display function.  Deletes divs whihc represent the numbers and funcs selected by user
@@ -100,6 +106,7 @@ function numbers(input)    {
         memory[0] = parseFloat(memory[0])                 //converts string to integers
     }
     else if (memory[1] != 0  && memory[2] == 0)    {    //conditional to see whether memory[2] contains anything, will clear display much like a real calculator to take second number input by user
+        display.classList.remove('smaller')
         clear()
         print(input)
         memory[2] += input

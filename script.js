@@ -157,6 +157,10 @@ function equate(a,b)   {                    // equals funtion, looks at func ope
 
 function backspace()    {
 
+    if (display.childElementCount < 11) {
+        display.classList.remove('smaller')
+    }
+
     if (memory[0] != 0 && memory[2] == 0 && memory[1] == 0)  {
         if (memory[0] > 9 || memory[0] < -9)    {
             memory[0] = memory[0].toString()

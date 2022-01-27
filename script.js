@@ -39,7 +39,7 @@ equals.addEventListener('click', () =>  {
     memory[2] = parseFloat(memory[2])
     clear()
     subPrint()
-    memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
+    memory[0] = equate(memory[0], memory[2]).toString()            //executes equate function and returns anser in memory[0]
     memory[1] = '0'
     memory[2] = '0'
     print(memory[0])
@@ -63,7 +63,7 @@ window.addEventListener('keydown', (e) => {                 //Keyboard support, 
     memory[2] = parseFloat(memory[2])
     clear()
     subPrint()
-    memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
+    memory[0] = equate(memory[0], memory[2]).toString()            //executes equate function and returns anser in memory[0]
     memory[1] = '0'
     memory[2] = '0'
     print(memory[0])

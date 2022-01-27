@@ -1,4 +1,4 @@
-let memory = [0, 0, 0]                                    //array that will hold arguments and funtion type, memeory[0] & memory[2] to hold numbers, memory[1] holds operator
+let memory = ['0', '0', '0']                                    //array that will hold arguments and funtion type, memeory[0] & memory[2] to hold numbers, memory[1] holds operator
 
 
 const digits = document.querySelectorAll('.number')     // listens for when the user clicks or presses any of the digits
@@ -20,7 +20,7 @@ funcs.forEach((func) => {
 const ce = document.querySelector('.CE')               //listens for when user hits the CE button and wipes memory array
 
 ce.addEventListener('click', () => {
-    memory = [0, 0, 0]
+    memory = ['0', '0', '0']
     display.classList.remove('smaller')
     clear()
 })
@@ -35,9 +35,11 @@ del.addEventListener('click', () => {
 const equals = document.querySelector('#Enter')         //listens for when user clicks equals button
 
 equals.addEventListener('click', () =>  {
+    memory[0] = parseFloat(memory[0])
+    memory[2] = parseFloat(memory[2])
     memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
-    memory[1] = 0
-    memory[2] = 0
+    memory[1] = '0'
+    memory[2] = '0'
     clear()
     print(memory[0])
 })
@@ -56,14 +58,16 @@ window.addEventListener('keydown', (e) => {                 //Keyboard support, 
        operators(button.id)
    }
     else if (button.id == `Enter`)   {
+    memory[0] = parseFloat(memory[0])
+    memory[2] = parseFloat(memory[2])
     memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
-    memory[1] = 0
-    memory[2] = 0
+    memory[1] = '0'
+    memory[2] = '0'
     clear()
     print(memory[0])
     }
     else if (button.id == `Delete`)  {                   //Delete key is the keyboard support for the CE
-        memory = [0, 0, 0]
+        memory = ['0', '0', '0']
         display.classList.remove('smaller')
         clear()
     }
@@ -101,21 +105,30 @@ function clear()    {                                  //CE, clear display funct
 function numbers(input)    {
     
     if  (memory[1] == 0)    {
-        print(input)
-        memory[0] += input                          //appends user input instead of adding number together, creates string of numbers
-        memory[0] = parseFloat(memory[0])                 //converts string to integers
+        
+        if (input == '.' && isFloat(memory[0]) == true)   {
+            return
+        }
+        else    {
+            print(input)
+            memory[0] += input      //appends user input instead of adding number together, creates string of numbers                          
+        }
     }
     else if (memory[1] != 0  && memory[2] == 0)    {    //conditional to see whether memory[2] contains anything, will clear display much like a real calculator to take second number input by user
         display.classList.remove('smaller')
         clear()
         print(input)
         memory[2] += input
-        memory[2] = parseFloat(memory[2])
     }
     else if (memory[1] != 0  && memory[2] != 0)     {
-        print(input)
-        memory[2] += input
-        memory[2] = parseFloat(memory[2])
+        
+        if (input == '.' && isFloat(memory[2]) == true)   {
+            return
+        }
+        else    {
+            print(input)
+            memory[2] += input
+        }
     }
 }
 
@@ -125,9 +138,11 @@ function operators(input)   {
         print(input)
     }
     else    {                                       //case when the user will "chain" functions together instead of using the equals button
+        memory[0] = parseFloat(memory[0])
+        memory[2] = parseFloat(memory[2])
         memory[0] = equate(memory[0], memory[2])
         memory[1] = input
-        memory[2] = 0
+        memory[2] = '0'
         clear()
         print(memory[0])
         print(input)
@@ -162,23 +177,25 @@ function backspace()    {
     }
 
     if (memory[0] != 0 && memory[2] == 0 && memory[1] == 0)  {
-        if (memory[0] > 9 || memory[0] < -9)    {
-            memory[0] = memory[0].toString()
+        if (memory[0].length > 1)    {
             memory[0] = memory[0].slice(0, -1)
-            memory[0] = parseFloat(memory[0])
         }
-        else memory[0] = 0
+        else memory[0] = '0'
     }
     else if (memory[0] != 0 && memory[2] != 0)  {
-        if (memory[2] > 9 || memory[2] < -9)    {
-            memory[2] = memory[2].toString()
+        if (memory[2].length > 1)    {
             memory[2] = memory[2].slice(0, -1)
-            memory[2] = parseFloat(memory[2])
         }
-        else memory[2] = 0
+        else memory[2] = '0'
     }
     else  if (memory[0] != 0 && memory[2] == 0 && memory[1] != 0)  {
-        memory[1] = 0
+        memory[1] = '0'
     }
     else return
+}
+
+function isFloat(x)    {                              // function to check if argument is a floating number
+    if (x.indexOf('.') > -1) return true
+    
+    else return false
 }

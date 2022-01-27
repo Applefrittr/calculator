@@ -37,10 +37,11 @@ const equals = document.querySelector('#Enter')         //listens for when user 
 equals.addEventListener('click', () =>  {
     memory[0] = parseFloat(memory[0])
     memory[2] = parseFloat(memory[2])
+    clear()
+    subPrint()
     memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
     memory[1] = '0'
     memory[2] = '0'
-    clear()
     print(memory[0])
 })
 
@@ -60,10 +61,11 @@ window.addEventListener('keydown', (e) => {                 //Keyboard support, 
     else if (button.id == `Enter`)   {
     memory[0] = parseFloat(memory[0])
     memory[2] = parseFloat(memory[2])
+    clear()
+    subPrint()
     memory[0] = equate(memory[0], memory[2])            //executes equate function and returns anser in memory[0]
     memory[1] = '0'
     memory[2] = '0'
-    clear()
     print(memory[0])
     }
     else if (button.id == `Delete`)  {                   //Delete key is the keyboard support for the CE
@@ -90,7 +92,7 @@ function print(x)   {                                 //function that will displ
         screen.appendChild(div)
     }
 
-    if (display.childElementCount > 10) {
+    if (display.childElementCount > 10) {               //shrink and wraps divs if #display gets full
         display.classList.add('smaller')
     }
 }
@@ -99,6 +101,9 @@ function clear()    {                                  //CE, clear display funct
    
     while (display.firstChild)  {
         display.removeChild(display.firstChild)
+    }
+    while (subdisplay.firstChild)  {
+        subdisplay.removeChild(subdisplay.firstChild)
     }
 }
 
@@ -170,7 +175,7 @@ function equate(a,b)   {                    // equals funtion, looks at func ope
     }    
 }
 
-function backspace()    {
+function backspace()    {                               //backspace/delele function, will delete off last string character in memory
 
     if (display.childElementCount < 11) {
         display.classList.remove('smaller')
@@ -198,4 +203,12 @@ function isFloat(x)    {                              // function to check if ar
     if (x.indexOf('.') > -1) return true
     
     else return false
+}
+
+function subPrint() {                                   // subdsiplay that will display the current memory values which yeilds answer in main display
+    const subScreen = document.querySelector('#subdisplay')
+
+    const div = document.createElement('div')
+    div.textContent = `${memory[0]} ${memory[1]} ${memory[2]}`
+    subScreen.appendChild(div)
 }

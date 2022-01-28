@@ -13,7 +13,15 @@ const funcs = document.querySelectorAll('.func')        //listens for when user 
 
 funcs.forEach((func) => {
     func.addEventListener('click', () => {              
-       operators(func.id)
+       if (func.id == '√')  {
+        clear()
+        memory[0] = parseFloat(memory[0])
+        subPrintSqr()
+        memory[0] = sqrRoot(memory[0]).toString()   
+        print(memory[0])
+        memory[1] = '0'
+       }
+       else operators(func.id)
     })
 })
 
@@ -210,5 +218,17 @@ function subPrint() {                                   // subdsiplay that will 
 
     const div = document.createElement('div')
     div.textContent = `${memory[0]} ${memory[1]} ${memory[2]}`
+    subScreen.appendChild(div)
+}
+
+function sqrRoot(a)  {                                  // square root funtion, stand alone as this function does nto take a 2nd paramenter
+    return a**(1/2)
+}
+
+function subPrintSqr()  {
+    const subScreen = document.querySelector('#subdisplay')
+
+    const div = document.createElement('div')
+    div.textContent = `√ ${memory[0]}`
     subScreen.appendChild(div)
 }

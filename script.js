@@ -17,7 +17,7 @@ funcs.forEach((func) => {
         clear()
         memory[0] = parseFloat(memory[0])
         subPrintSqr()
-        memory[0] = sqrRoot(memory[0]).toString()   
+        memory[0] = sqrRoot(memory[0]).toString()
         print(memory[0])
         memory[1] = '0'
        }

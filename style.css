@@ -3,7 +3,7 @@ div.calculator  {
     align-items: center;
     /*justify-content: space-around;*/
     background-color: silver;
-    height: 800px;
+    height: 85vh;
     width: 500px;
     border: solid 3px black;
     border-radius: 10px;
@@ -168,7 +168,7 @@ button.func:active  {
 div.footer  {
     color: gray;
     font-size: 18px;
-    margin-top: 25px;
+    margin: 10px;
 }
 
 .smaller    {
